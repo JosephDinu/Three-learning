@@ -12,6 +12,16 @@
 </style>
 </head>
 <body>
+    <script id="vertexShader" type="vertex">
+        void main() {
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    </script>
+    <script id="fragmentShader" type="fragment">
+        void main() {
+            gl_FragColor = vec4(1.0, 0.1, 0.3, 1.0);
+        }
+    </script>
     <script src="/index.64a4978e.js" defer=""></script>
 </body>
 </html>
