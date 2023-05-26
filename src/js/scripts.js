@@ -65,11 +65,13 @@ function createPlanete(size, texture, position, ring) {
     const mesh = new THREE.Mesh(geo, mat);
     const obj = new THREE.Object3D();
     obj.add(mesh);
-    if(ring) {
+
+    if (ring) {
         const ringGeo = new THREE.RingGeometry(
             ring.innerRadius,
             ring.outerRadius,
             32);
+
         const ringMat = new THREE.MeshBasicMaterial({
             map: textureLoader.load(ring.texture),
             side: THREE.DoubleSide
@@ -78,11 +80,15 @@ function createPlanete(size, texture, position, ring) {
         obj.add(ringMesh);
         ringMesh.position.x = position;
         ringMesh.rotation.x = -0.5 * Math.PI;
+
+        const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
+        scene.add(pointLight)
     }
+
     scene.add(obj);
     mesh.position.x = position;
     return {mesh, obj}
-}
+};
 
 const mercury = createPlanete(3.2, mercuryTexture, 28);
 const venus = createPlanete(5.8, venusTexture, 44);
@@ -100,10 +106,7 @@ const uranus = createPlanete(7, uranusTexture, 176, {
     texture: uranusRingTexture
 });
 const neptune = createPlanete(7, neptuneTexture, 200);
-const pluto = createPlanete(2.8, plutoTexture, 216);
-
-const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
-scene.add(pointLight);
+const pluto = createPlanete(2.8, plutoTexture, 218);
 
 function animate() {
     //Self-rotation
